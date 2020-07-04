@@ -40,10 +40,17 @@ public struct CircularCheckmarkProgressViewStyle: ProgressViewStyle {
                         .font(percentageFont)
                 }
             }
-            if configuration.fractionCompleted == 1.0 {
-                finishedShape
-                    .stroke(style: strokeStyle)
-            }
+
+            finishedShape
+                .stroke(style: strokeStyle)
+                .scaleEffect(configuration.fractionCompleted == 1.0 ? 1.0 : 0.0)
+                .opacity(configuration.fractionCompleted == 1.0 ? 1.0 : 0.0)
+                .animation(
+                    Animation.spring(
+                      response: 0.55,
+                      dampingFraction: 0.35
+                    ).speed(1.5)
+                )
         }
     }
 }
