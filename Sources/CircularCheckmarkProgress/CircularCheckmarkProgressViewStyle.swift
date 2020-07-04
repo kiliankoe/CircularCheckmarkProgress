@@ -35,7 +35,7 @@ public struct CircularCheckmarkProgressViewStyle: ProgressViewStyle {
                 .stroke(style: strokeStyle)
                 .rotationEffect(.radians(.pi * 1.5), anchor: .center)
             if showPercentage {
-                if configuration.fractionCompleted != 1.0 {
+                if !configuration.isFinished {
                     text(forPercentage: configuration.fractionCompleted ?? 0)
                         .font(percentageFont)
                 }
@@ -43,8 +43,8 @@ public struct CircularCheckmarkProgressViewStyle: ProgressViewStyle {
 
             finishedShape
                 .stroke(style: strokeStyle)
-                .scaleEffect(configuration.fractionCompleted == 1.0 ? 1.0 : 0.0)
-                .opacity(configuration.fractionCompleted == 1.0 ? 1.0 : 0.0)
+                .scaleEffect(configuration.isFinished ? 1.0 : 0.0)
+                .opacity(configuration.isFinished ? 1.0 : 0.0)
                 .animation(
                     Animation.spring(
                       response: 0.55,
