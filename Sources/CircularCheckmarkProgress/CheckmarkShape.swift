@@ -11,3 +11,12 @@ public struct CheckmarkShape: Shape {
         }
     }
 }
+
+struct CheckmarkShape_Previews: PreviewProvider {
+    static var previews: some View {
+        CheckmarkShape()
+            .stroke(lineWidth: 10)
+            .frame(width: 200, height: 200)
+            .previewLayout(.sizeThatFits)
+    }
+}
