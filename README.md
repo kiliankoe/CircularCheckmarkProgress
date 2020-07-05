@@ -2,7 +2,7 @@
 
 WWDC '20 introduced a new `ProgressView` view to SwiftUI which also has the option of styling it via `.progressViewStyle()` passing in a `ProgressViewStyle`. This package contains one such style, the `CircularCheckmarkProgressViewStyle`.
 
-<img src="https://user-images.githubusercontent.com/2625584/86522712-70659780-be62-11ea-8e06-812bccbca2ad.gif" width="200px" alt="screen recording" />
+<img src="https://user-images.githubusercontent.com/2625584/86522912-35b12e80-be65-11ea-9301-0b2441175c9b.gif" width="200px" alt="screen recording" />
 
 ```swift
 ProgressView(/* ... */)
