@@ -52,10 +52,12 @@ public struct CircularCheckmarkProgressViewStyle: ProgressViewStyle {
                     .trim(from: 0, to: configuration.isFinished ? 1.0: 0.0)
                     .stroke(style: strokeStyle)
                     .animation(Animation.easeInOut.speed(2.0))
+                    .opacity(configuration.isFinished ? 1.0 : 0.0)
             case .spring:
                 CheckmarkShape()
                     .stroke(style: strokeStyle)
                     .modifier(SpringAnimation(configuration: configuration))
+                    .opacity(configuration.isFinished ? 1.0 : 0.0)
             }
         }
     }

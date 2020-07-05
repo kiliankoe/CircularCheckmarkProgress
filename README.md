@@ -2,14 +2,11 @@
 
 WWDC '20 introduced a new `ProgressView` view to SwiftUI which also has the option of styling it via `.progressViewStyle()` passing in a `ProgressViewStyle`. This package contains one such style, the `CircularCheckmarkProgressViewStyle`.
 
-<img src="https://user-images.githubusercontent.com/2625584/86531315-72f6da00-bec0-11ea-9d24-03589458d70d.gif" width="600px" alt="screen recording" />
+<img src="https://user-images.githubusercontent.com/2625584/86531802-b05d6680-bec4-11ea-8d6a-4752a0d6ac42.gif" width="600px" alt="screen recording" />
 
 ```swift
 ProgressView(/* ... */)
     .progressViewStyle(CircularCheckmarkProgressViewStyle())
-    .foreground(LinearGradient(gradient: Gradient(colors: [.pink, .purple]), 
-                               startPoint: .top,
-                               endPoint: .bottom))
 ```
 
 ## Configuration
@@ -27,7 +24,15 @@ var checkmarkAnimation: CheckmarkAnimationType = .trim
 
 This package also exposes a view modifier called `.foreground()` which you can use to overlay a `ProgressView` (or others) entirely with a gradient of your choice (see example above). Otherwise feel free to use `foregroundColor()` to tint to your liking. 
 
-These two snippets create the second and third examples shown in the sample GIF above.
+These snippets create the examples shown in the sample GIF above.
+
+```swift
+ProgressView(/* ... */)
+    .progressViewStyle(CircularCheckmarkProgressViewStyle())
+    .foreground(LinearGradient(gradient: Gradient(colors: [.pink, .purple]), 
+                               startPoint: .top,
+                               endPoint: .bottom))
+```
 
 ```swift
 ProgressView(/* ... */)
