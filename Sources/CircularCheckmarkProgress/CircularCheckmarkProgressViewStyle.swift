@@ -13,6 +13,22 @@ public struct CircularCheckmarkProgressViewStyle: ProgressViewStyle {
     public var percentageFont = Font.system(.largeTitle, design: .monospaced).bold()
     public var checkmarkAnimation: CheckmarkAnimationType = .trim
 
+    public init(
+        strokeStyle: StrokeStyle = StrokeStyle(lineWidth: 10.0, lineCap: .round, lineJoin: .round),
+        showGuidingLine: Bool = true,
+        guidingLineWidth: CGFloat = 1.0,
+        showPercentage: Bool = false,
+        percentageFont: Font = Font.system(.largeTitle, design: .monospaced).bold(),
+        checkmarkAnimation: CheckmarkAnimationType = .trim
+    ) {
+        self.strokeStyle = strokeStyle
+        self.showGuidingLine = showGuidingLine
+        self.guidingLineWidth = guidingLineWidth
+        self.showPercentage = showPercentage
+        self.percentageFont = percentageFont
+        self.checkmarkAnimation = checkmarkAnimation
+    }
+
     private static var numberFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
         formatter.numberStyle = .percent
