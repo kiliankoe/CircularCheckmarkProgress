@@ -30,7 +30,7 @@ ProgressView(/* ... */)
 On passing a `CircularCheckmarkProgressViewStyle` to the `.progressViewStyle()` modifier you have a few options to configure the style by optionally specifying the following arguments in its initializer. If not changed, they fall back to their listed default values.
 
 ```swift
-var strokeStyle = StrokeStyle(lineWidth: 10.0, lineCap: .round)
+var strokeStyle = StrokeStyle(lineWidth: 10.0, lineCap: .round, lineJoin: .round)
 var showGuidingLine = true
 var guidingLineWidth: CGFloat = 1.0
 var showPercentage = true
