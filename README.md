@@ -12,7 +12,7 @@ ProgressView(/* ... */)
                                endPoint: .bottom))
 ```
 
-<img src="https://user-images.githubusercontent.com/2625584/86522912-35b12e80-be65-11ea-9301-0b2441175c9b.gif" width="200px" alt="alternate screen recording" />
+<img src="https://user-images.githubusercontent.com/2625584/86522812-86278c80-be63-11ea-8370-976a0311e371.gif" width="200px" alt="alternate screen recording" />
 
 ```swift
 ProgressView(/* ... */)
