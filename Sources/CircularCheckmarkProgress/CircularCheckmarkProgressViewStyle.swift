@@ -3,7 +3,11 @@ import SwiftUI
 import Combine
 
 public struct CircularCheckmarkProgressViewStyle: ProgressViewStyle {
-    public var strokeStyle = StrokeStyle(lineWidth: 10.0, lineCap: .round)
+    public var strokeStyle = StrokeStyle(
+        lineWidth: 10.0,
+        lineCap: .round,
+        lineJoin: .round
+    )
     public var showGuidingLine = true
     public var guidingLineWidth: CGFloat = 1.0
     public var showPercentage = true
