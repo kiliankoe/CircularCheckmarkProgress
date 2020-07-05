@@ -23,6 +23,7 @@ var guidingLineWidth: CGFloat = 1.0
 var showPercentage = true
 var percentageFont = Font.system(.largeTitle, design: .monospaced).bold()
 var finishedShape = CheckmarkShape()
+var finishedAnimation = Animation.spring(response: 0.55, dampingFraction: 0.35).speed(1.5)
 ```
 
 This package also exposes a view modifier called `.foreground()` which you can use to overlay a `ProgressView` (or others) entirely with a gradient of your choice (see example above). Otherwise feel free to use `foregroundColor()` to tint to your liking. 

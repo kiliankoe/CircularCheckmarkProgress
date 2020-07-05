@@ -3,14 +3,15 @@ import SwiftUI
 import Combine
 
 public struct CircularCheckmarkProgressViewStyle: ProgressViewStyle {
-    public var strokeStyle = StrokeStyle(
-        lineWidth: 10.0,
-        lineCap: .round)
+    public var strokeStyle = StrokeStyle(lineWidth: 10.0, lineCap: .round)
     public var showGuidingLine = true
     public var guidingLineWidth: CGFloat = 1.0
     public var showPercentage = true
     public var percentageFont = Font.system(.largeTitle, design: .monospaced).bold()
     public var finishedShape = CheckmarkShape()
+    public var finishedAnimation = Animation.spring(response: 0.55,
+                                                    dampingFraction: 0.35)
+                                            .speed(1.5)
 
     private static var numberFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
@@ -45,12 +46,7 @@ public struct CircularCheckmarkProgressViewStyle: ProgressViewStyle {
                 .stroke(style: strokeStyle)
                 .scaleEffect(configuration.isFinished ? 1.0 : 0.0)
                 .opacity(configuration.isFinished ? 1.0 : 0.0)
-                .animation(
-                    Animation.spring(
-                      response: 0.55,
-                      dampingFraction: 0.35
-                    ).speed(1.5)
-                )
+                .animation(finishedAnimation)
         }
     }
 }
