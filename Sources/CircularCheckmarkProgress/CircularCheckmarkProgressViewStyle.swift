@@ -9,12 +9,9 @@ public struct CircularCheckmarkProgressViewStyle: ProgressViewStyle {
     )
     public var showGuidingLine = true
     public var guidingLineWidth: CGFloat = 1.0
-    public var showPercentage = true
+    public var showPercentage = false
     public var percentageFont = Font.system(.largeTitle, design: .monospaced).bold()
-    public var finishedShape = CheckmarkShape()
-    public var finishedAnimation = Animation.spring(response: 0.55,
-                                                    dampingFraction: 0.35)
-                                            .speed(1.5)
+    public var checkmarkAnimation: CheckmarkAnimationType = .trim
 
     private static var numberFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
@@ -45,11 +42,21 @@ public struct CircularCheckmarkProgressViewStyle: ProgressViewStyle {
                 }
             }
 
-            finishedShape
-                .stroke(style: strokeStyle)
-                .scaleEffect(configuration.isFinished ? 1.0 : 0.0)
-                .opacity(configuration.isFinished ? 1.0 : 0.0)
-                .animation(finishedAnimation)
+            switch checkmarkAnimation {
+            case .none:
+                CheckmarkShape()
+                    .stroke(style: strokeStyle)
+                    .opacity(configuration.isFinished ? 1.0 : 0.0)
+            case .trim:
+                CheckmarkShape()
+                    .trim(from: 0, to: configuration.isFinished ? 1.0: 0.0)
+                    .stroke(style: strokeStyle)
+                    .animation(Animation.easeInOut.speed(2.0))
+            case .spring:
+                CheckmarkShape()
+                    .stroke(style: strokeStyle)
+                    .modifier(SpringAnimation(configuration: configuration))
+            }
         }
     }
 }
@@ -65,17 +72,23 @@ struct LoadingCheckmark_Previews: PreviewProvider {
     static var previews: some View {
         HStack(spacing: 40) {
             ProgressView(loading.progress)
-                .progressViewStyle(CircularCheckmarkProgressViewStyle(
-                    showPercentage: false
-                ))
+                .progressViewStyle(CircularCheckmarkProgressViewStyle())
                 .foreground(pinkPurpleGradient)
                 .frame(width: 200, height: 200)
             ProgressView(loading.progress)
                 .progressViewStyle(CircularCheckmarkProgressViewStyle(
                     strokeStyle: StrokeStyle(lineWidth: 5.0),
-                    finishedAnimation: .default
+                    checkmarkAnimation: .spring
                 ))
-                .foregroundColor(loading.progress.isFinished ? .green : .blue)
+                .foregroundColor(.blue)
+                .frame(width: 200, height: 200)
+            ProgressView(loading.progress)
+                .progressViewStyle(CircularCheckmarkProgressViewStyle(
+                    strokeStyle: StrokeStyle(lineWidth: 2.0),
+                    showGuidingLine: false,
+                    showPercentage: true,
+                    checkmarkAnimation: .none
+                ))
                 .frame(width: 200, height: 200)
         }
         .onAppear {
