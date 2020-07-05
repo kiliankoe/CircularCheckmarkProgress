@@ -1,6 +1,5 @@
 import Foundation
 import SwiftUI
-import Combine
 
 public struct CircularCheckmarkProgressViewStyle: ProgressViewStyle {
     public var strokeStyle = StrokeStyle(
@@ -55,58 +54,32 @@ public struct CircularCheckmarkProgressViewStyle: ProgressViewStyle {
     }
 }
 
-private class PreviewLoadingObject: ObservableObject {
-    @Published var progress: Progress
-    @Published var finished = false
-    private var timer: AnyCancellable?
+struct LoadingCheckmark_Previews: PreviewProvider {
+    @ObservedObject static var loading = PreviewLoadingObject()
 
-    init() {
-        progress = Progress(totalUnitCount: 100)
-    }
-
-    func start() {
-        timer = Timer.publish(every: 0.025, on: .main, in: .common)
-            .autoconnect()
-            .sink { _ in
-                self.progress.completedUnitCount += 1
-                if self.progress.isFinished {
-                    self.timer = nil
-                    self.finished = true
-
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                        self.finished = false
-                        self.progress.completedUnitCount = 0
-                        self.start()
-                    }
-                }
-            }
-    }
-}
-
-private struct LoadingCheckmarkPreviewView: View {
-    @ObservedObject var loading = PreviewLoadingObject()
-
-    let pinkPurpleGradient = LinearGradient(gradient: Gradient(
+    static let pinkPurpleGradient = LinearGradient(gradient: Gradient(
                                                 colors: [Color.pink, Color.purple]),
                                             startPoint: .top,
                                             endPoint: .bottom)
 
-    var body: some View {
-        ProgressView(loading.progress)
-            .progressViewStyle(CircularCheckmarkProgressViewStyle())
-//            .foregroundColor(.blue)
-            .foreground(pinkPurpleGradient)
-            .onAppear {
-                loading.start()
-            }
-    }
-}
-
-struct LoadingCheckmark_Previews: PreviewProvider {
     static var previews: some View {
-        LoadingCheckmarkPreviewView()
-            .frame(width: 200, height: 200)
-            .padding()
-            .previewLayout(.sizeThatFits)
+        HStack(spacing: 40) {
+            ProgressView(loading.progress)
+                .progressViewStyle(CircularCheckmarkProgressViewStyle(
+                    showPercentage: false
+                ))
+                .foreground(pinkPurpleGradient)
+                .frame(width: 200, height: 200)
+            ProgressView(loading.progress)
+                .progressViewStyle(CircularCheckmarkProgressViewStyle(
+                    strokeStyle: StrokeStyle(lineWidth: 5.0),
+                    finishedAnimation: .default
+                ))
+                .foregroundColor(loading.progress.isFinished ? .green : .blue)
+                .frame(width: 200, height: 200)
+        }
+        .onAppear {
+            loading.start()
+        }
     }
 }
