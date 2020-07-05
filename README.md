@@ -12,6 +12,19 @@ ProgressView(/* ... */)
                                endPoint: .bottom))
 ```
 
+<img src="https://user-images.githubusercontent.com/2625584/86522812-86278c80-be63-11ea-8370-976a0311e371.gif" width="200px" alt="alternate screen recording" />
+
+```swift
+ProgressView(/* ... */)
+    .progressViewStyle(CircularCheckmarkProgressViewStyle(
+        strokeStyle: StrokeStyle(lineWidth: 2.0),
+        showGuidingLine: false,
+        showPercentage: false,
+        finishedAnimation: .default
+    ))
+    .foregroundColor(.blue)
+```
+
 ## Configuration
 
 On passing a `CircularCheckmarkProgressViewStyle` to the `.progressViewStyle()` modifier you have a few options to configure the style by optionally specifying the following arguments in its initializer. If not changed, they fall back to their listed default values.
