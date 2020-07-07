@@ -80,7 +80,7 @@ public struct CircularCheckmarkProgressViewStyle: ProgressViewStyle {
 }
 
 struct LoadingCheckmark_Previews: PreviewProvider {
-    @ObservedObject static var loading = PreviewLoadingObject()
+    @ObservedObject static var loading = PreviewLoadingObject(period: 2.5)
 
     static let pinkPurpleGradient = LinearGradient(gradient: Gradient(
                                                 colors: [Color.pink, Color.purple]),

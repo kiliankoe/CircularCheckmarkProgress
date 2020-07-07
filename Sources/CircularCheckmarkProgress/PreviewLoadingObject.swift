@@ -9,12 +9,16 @@ class PreviewLoadingObject: ObservableObject {
     @Published var finished = false
     private var timer: AnyCancellable?
 
-    init() {
-        progress = Progress(totalUnitCount: 100)
+    var timerIteration: TimeInterval
+    let totalUnitCount: Int64 = 100
+
+    init(period: TimeInterval) {
+        progress = Progress(totalUnitCount: totalUnitCount)
+        timerIteration = period / Double(totalUnitCount)
     }
 
     func start() {
-        timer = Timer.publish(every: 0.025, on: .main, in: .common)
+        timer = Timer.publish(every: timerIteration, on: .main, in: .common)
             .autoconnect()
             .sink { _ in
                 self.progress.completedUnitCount += 1
