@@ -6,7 +6,7 @@ let package = Package(
     name: "CircularCheckmarkProgress",
     platforms: [
         .iOS(.v14),
-        .macOS(.v10_16),
+        .macOS(.v11),
         .watchOS(.v7),
         .tvOS(.v14),
     ],
